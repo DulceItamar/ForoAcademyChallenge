@@ -19,6 +19,9 @@ public class AcademyMember {
     private Long id;
     private String name;
     private String email;
+    @Enumerated(EnumType.STRING)
     private MemberCategory memberCategory;
     private Boolean isActive;
+
+
 }
