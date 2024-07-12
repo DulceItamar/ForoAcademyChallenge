@@ -24,4 +24,5 @@ public class Topic {
     private String message;
     private Date creationDate;
     private AcademyMember academyMember;
+
 }
