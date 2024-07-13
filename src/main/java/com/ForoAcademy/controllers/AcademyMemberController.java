@@ -45,6 +45,13 @@ public class AcademyMemberController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DataResponseAcademyMember> returnAcademyMemberDataById(@PathVariable Long id){
+        AcademyMember academyMember = repository.getReferenceById(id);
 
+         var academyMemberData = new DataResponseAcademyMember(academyMember.getId(), academyMember.getName(), academyMember.getEmail(),academyMember.getMemberCategory(), academyMember.getIsActive());
+
+         return ResponseEntity.ok(academyMemberData);
+    }
 
 }
