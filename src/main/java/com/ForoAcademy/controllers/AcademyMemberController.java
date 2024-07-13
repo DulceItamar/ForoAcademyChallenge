@@ -35,8 +35,14 @@ public class AcademyMemberController {
     public ResponseEntity<Page<DataAcademyMemberList>> academyMemeberList(@PageableDefault(size = 5)Pageable pageable){
 
         return ResponseEntity.ok(repository.findAllByIsActiveTrue(pageable).map(DataAcademyMemberList::new));
+    }
 
-
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deleteAcademyMemberById(@PathVariable Long id ){
+        AcademyMember academyMember = repository.getReferenceById(id);
+        academyMember.disableAcademyMemberAccount();
+        return ResponseEntity.noContent().build();
     }
 
 

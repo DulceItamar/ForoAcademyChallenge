@@ -31,4 +31,8 @@ public class AcademyMember {
         this.isActive = true;
     }
 
+    public void disableAcademyMemberAccount(){
+        this.isActive = false;
+    }
+
 }
