@@ -24,4 +24,11 @@ public class AcademyMember {
     private Boolean isActive;
 
 
+    public AcademyMember(DataSignInAcademyMember academyMember){
+        this.name = academyMember.name();
+        this.email = academyMember.email();
+        this.memberCategory = academyMember.memberCategory();
+        this.isActive = true;
+    }
+
 }
