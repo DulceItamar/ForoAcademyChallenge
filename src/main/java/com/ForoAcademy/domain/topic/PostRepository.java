@@ -2,6 +2,6 @@ package com.ForoAcademy.domain.topic;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TopicRepository extends JpaRepository<Topic, Long> {
+public interface PostRepository extends JpaRepository<Post, Long> {
 
 }

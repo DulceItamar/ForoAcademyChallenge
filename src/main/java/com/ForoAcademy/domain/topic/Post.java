@@ -6,17 +6,16 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ManyToAny;
 
 import java.util.Date;
 
-@Table(name = "topics")
-@Entity(name = "Topic")
+@Table(name = "Posts")
+@Entity(name = "Post")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Topic {
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
