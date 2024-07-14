@@ -35,4 +35,19 @@ public class AcademyMember {
         this.isActive = false;
     }
 
+    public void reaciveAcademyMemberAccount(){
+        this.isActive = true;
+    }
+
+    public void updateAcademyMemberData( DataAcademyMemberUpdate dataAcademyMemberUpdate) {
+        if (dataAcademyMemberUpdate.name() != null) {
+            this.name = dataAcademyMemberUpdate.name();
+        }
+
+        if (dataAcademyMemberUpdate.email() != null ) {
+            this.email = dataAcademyMemberUpdate.email();
+        }
+
+    }
+
 }

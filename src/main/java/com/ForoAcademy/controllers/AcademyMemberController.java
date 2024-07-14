@@ -17,6 +17,7 @@ public class AcademyMemberController {
     @Autowired
     private AcademyMemberRepository repository;
 
+
     @PostMapping
     public ResponseEntity<DataResponseAcademyMember> signInAcademyMember(@RequestBody @Valid DataSignInAcademyMember dataSignInAcademyMember, UriComponentsBuilder uriComponentsBuilder){
         AcademyMember academyMember = new AcademyMember(dataSignInAcademyMember);
@@ -30,12 +31,47 @@ public class AcademyMemberController {
 
     }
 
+
     @GetMapping
     @Transactional
     public ResponseEntity<Page<DataAcademyMemberList>> academyMemeberList(@PageableDefault(size = 5)Pageable pageable){
 
         return ResponseEntity.ok(repository.findAllByIsActiveTrue(pageable).map(DataAcademyMemberList::new));
     }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DataResponseAcademyMember> returnAcademyMemberDataById(@PathVariable Long id){
+        AcademyMember academyMember = repository.getReferenceById(id);
+
+        var academyMemberData = new DataResponseAcademyMember(academyMember.getId(), academyMember.getName(), academyMember.getEmail(),academyMember.getMemberCategory(), academyMember.getIsActive());
+
+        return ResponseEntity.ok(academyMemberData);
+    }
+
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity updateAcademyMember( @RequestBody @Valid DataAcademyMemberUpdate dataAcademyMemberUpdate) {
+        AcademyMember academyMember = repository.getReferenceById(dataAcademyMemberUpdate.id());
+        academyMember.updateAcademyMemberData(dataAcademyMemberUpdate);
+
+        var response = new  DataResponseAcademyMember( academyMember.getId(), academyMember.getName(), academyMember.getEmail(), academyMember.getMemberCategory(), academyMember.getIsActive());
+
+        return ResponseEntity.ok(response);
+    }
+
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity reactiveAcademyMember( @PathVariable Long id) {
+        AcademyMember academyMember = repository.getReferenceById(id);
+        academyMember.reaciveAcademyMemberAccount();;
+        var response = new  DataResponseAcademyMember( academyMember.getId(), academyMember.getName(), academyMember.getEmail(), academyMember.getMemberCategory(), academyMember.getIsActive());
+        return ResponseEntity.ok(response);
+    }
+
+
 
     @DeleteMapping("/{id}")
     @Transactional
@@ -45,13 +81,5 @@ public class AcademyMemberController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<DataResponseAcademyMember> returnAcademyMemberDataById(@PathVariable Long id){
-        AcademyMember academyMember = repository.getReferenceById(id);
-
-         var academyMemberData = new DataResponseAcademyMember(academyMember.getId(), academyMember.getName(), academyMember.getEmail(),academyMember.getMemberCategory(), academyMember.getIsActive());
-
-         return ResponseEntity.ok(academyMemberData);
-    }
 
 }
