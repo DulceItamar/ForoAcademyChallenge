@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Table(name = "Posts")
 @Entity(name = "Post")
@@ -28,7 +29,8 @@ public class Post {
     @JoinColumn(name = "academy_member_id")
     private AcademyMember academyMember;
 
-    @Enumerated(EnumType.STRING)
-    private UnsubscribeReason unsubscribeReason;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Response> responses;
 
 }
