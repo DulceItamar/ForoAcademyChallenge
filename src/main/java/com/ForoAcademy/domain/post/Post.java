@@ -1,12 +1,14 @@
-package com.ForoAcademy.domain.topic;
+package com.ForoAcademy.domain.post;
 
 import com.ForoAcademy.domain.academyMember.AcademyMember;
+import com.ForoAcademy.response.Response;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class Post {
     private Long id;
     private String title;
     private String message;
-    private Date creationDate;
+    private LocalDateTime creationDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "academy_member_id")

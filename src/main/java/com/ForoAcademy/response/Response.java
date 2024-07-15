@@ -1,12 +1,12 @@
-package com.ForoAcademy.domain.topic;
+package com.ForoAcademy.response;
 
 import com.ForoAcademy.domain.academyMember.AcademyMember;
+import com.ForoAcademy.domain.post.Post;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.aspectj.bridge.Message;
 
 import java.time.LocalDateTime;
 
