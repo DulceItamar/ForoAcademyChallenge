@@ -5,6 +5,7 @@ import com.ForoAcademy.domain.academyMember.MemberCategory;
 import com.ForoAcademy.domain.post.*;
 import com.ForoAcademy.infra.errors.IntegrityValidation;
 import com.ForoAcademy.validations.PostValidator;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,8 +51,30 @@ public class PostService {
        var post = postRepository.getReferenceById(dataDeletePost.idPost());
        var deletingReason = dataDeletePost.DeletingReason();
        return "Post eliminado. Motivo: " + deletingReason;
-
-
     }
+
+    public DataPostDetails showPostDetails(@Valid Long id){
+        if (!postRepository.existsById(id)){
+            throw new IntegrityValidation("El post que busca no se ha encontrado");
+        }
+        return new DataPostDetails(postRepository.getReferenceById(id));
+    }
+
+
+    public Post updatePost(Long idPost, @Valid DataUpdatePost dataUpdatePost ){
+        if (!postRepository.existsById(idPost)){
+            throw  new IntegrityValidation("El Post que desea actualizar no ha sido encontrado");
+        }
+
+        if (!postRepository.findByIdAndAuthorId(idPost, dataUpdatePost.idAuthor()).isPresent()){
+            throw new IntegrityValidation(("El autor no corresponde al Post que desea actualizar"));
+        }
+        Post updatePost = postRepository.getReferenceById(idPost);
+        updatePost.updatePost(dataUpdatePost);
+
+        return updatePost;
+    }
+
+
 
 }

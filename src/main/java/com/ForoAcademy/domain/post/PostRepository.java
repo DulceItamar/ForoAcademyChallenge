@@ -24,6 +24,14 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findByAcademyMemberId(Long academyMemberId);
 
     @Query("""
+            SELECT p
+            FROM Post p
+            WHERE p.id = :idPost
+            AND p.academy_member.id = :idAuthor
+            """)
+    Optional<Post> findByIdAndAuthorId( Long idPost, Long idAuthor);
+
+    @Query("""
             SELECT p 
             FROM Post p
             ORDER BY p.creationDate DESC

@@ -35,4 +35,18 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Response> responses;
 
+    public void updatePost(DataUpdatePost data) {
+
+
+
+        if (data.title() != null) {
+            this.title = data.title();
+        }
+
+        if (data.message() != null) {
+            this.message = data.message();
+        }
+
+    }
+
 }

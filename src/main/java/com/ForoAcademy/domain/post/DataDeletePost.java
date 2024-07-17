@@ -8,8 +8,8 @@ import jakarta.validation.constraints.NotNull;
 public record DataDeletePost(
         @JsonProperty("Post id")
         @NotNull Long idPost,
-        @JsonProperty("Motivo de eliminación")
+        @JsonProperty("Deleting reason")
         @NotBlank String DeletingReason,
-        @JsonProperty("Categoría")
+        @JsonProperty("Member category")
         @NotNull MemberCategory memberCategory) {
 }
